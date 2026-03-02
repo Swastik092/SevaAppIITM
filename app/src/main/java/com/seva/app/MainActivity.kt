@@ -19,6 +19,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
+import com.seva.app.data.Service
+import com.seva.app.data.ServiceRepo
 import com.seva.app.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -119,36 +121,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-data class Service(
-    val name: String,
-    val category: String,
-    val state: String,
-    val url: String
-)
-
-val services = listOf(
-    // Maharashtra
-    Service("Maharashtra Emergency Services", "Emergency Services", "Maharashtra", "https://www.maharashtra.gov.in/"),
-    Service("Maharashtra Women Safety", "Women Safety", "Maharashtra", "https://mumbaipolice.gov.in/WomenSafety"),
-    Service("Maharashtra Public Safety", "Public Safety", "Maharashtra", "https://www.maharashtrapolice.gov.in/"),
-    Service("Maharashtra Environmental Services", "Environmental & Pollution", "Maharashtra", "https://www.mpcb.gov.in/"),
-    Service("Maharashtra Traffic Services", "Traffic & Transport", "Maharashtra", "https://mahatranscom.in/"),
-    
-    // Karnataka
-    Service("Karnataka Emergency Services", "Emergency Services", "Karnataka", "https://www.karnataka.gov.in/"),
-    Service("Karnataka Women Safety", "Women Safety", "Karnataka", "https://ksp.karnataka.gov.in/page/Women+Safety/en"),
-    Service("Karnataka Public Safety", "Public Safety", "Karnataka", "https://ksp.karnataka.gov.in/"),
-    Service("Karnataka Environmental Services", "Environmental & Pollution", "Karnataka", "https://kspcb.karnataka.gov.in/"),
-    Service("Karnataka Traffic Services", "Traffic & Transport", "Karnataka", "https://transport.karnataka.gov.in/"),
-    
-    // Delhi
-    Service("Delhi Emergency Services", "Emergency Services", "Delhi", "https://delhi.gov.in/"),
-    Service("Delhi Women Safety", "Women Safety", "Delhi", "https://www.delhipolice.nic.in/"),
-    Service("Delhi Public Safety", "Public Safety", "Delhi", "https://www.delhipolice.nic.in/"),
-    Service("Delhi Environmental Services", "Environmental & Pollution", "Delhi", "https://dpcc.delhigovt.nic.in/"),
-    Service("Delhi Traffic Services", "Traffic & Transport", "Delhi", "https://traffic.delhipolice.nic.in/")
-)
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SevaAppScreen() {
@@ -158,7 +130,7 @@ fun SevaAppScreen() {
     var expanded by remember { mutableStateOf(false) }
     var selectedState by remember { mutableStateOf(states[0]) }
 
-    val filteredServices = services.filter { it.state == selectedState }
+    val filteredServices = ServiceRepo.services.filter { it.state == selectedState }
 
     Scaffold(
         topBar = {

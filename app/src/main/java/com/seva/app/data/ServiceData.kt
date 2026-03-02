@@ -10,12 +10,11 @@ data class Service(
 
 object ServiceRepo {
     val categories = listOf(
-        "Emergency",
-        "Women Safety",
-        "Public Safety",
-        "Documents",
-        "Environmental",
-        "Traffic"
+        "Emergency Services",
+        "Environmental and pollution complaints",
+        "Public Safety and Civic Issues",
+        "Women and child Safety",
+        "Health and Sanitation"
     )
 
     val states = listOf(
@@ -23,26 +22,35 @@ object ServiceRepo {
     )
 
     val services = listOf(
-        // Maharashtra
-        Service("Maharashtra Emergency", "Emergency", "Maharashtra", "https://www.maharashtra.gov.in/", "24/7 Emergency response services."),
-        Service("Maharashtra Women Safety", "Women Safety", "Maharashtra", "https://mumbaipolice.gov.in/WomenSafety", "Safety resources for women in Maharashtra."),
-        Service("MAHA-IT Portal", "Documents", "Maharashtra", "https://www.mahaonline.gov.in/", "Apply for certificates and documents online."),
+        // Emergency Services
+        Service("Fire Brigade", "Emergency Services", "Maharashtra", "https://mahafireservice.gov.in/", "24/7 Fire and rescue services."),
+        Service("Police", "Emergency Services", "Maharashtra", "https://mumbaipolice.gov.in/", "Direct contact with Maharashtra Police."),
+        Service("Ambulance", "Emergency Services", "Maharashtra", "https://108.gov.in/", "Emergency medical transport services."),
+        Service("Disaster Management", "Emergency Services", "Maharashtra", "https://mdm.maharashtra.gov.in/", "Disaster response and relief coordination."),
         
-        // Karnataka
-        Service("Karnataka Emergency", "Emergency", "Karnataka", "https://www.karnataka.gov.in/", "State emergency contact portal."),
-        Service("Karnataka Women Safety", "Women Safety", "Karnataka", "https://ksp.karnataka.gov.in/page/Women+Safety/en", "Dedicated safety portal for women."),
-        Service("Sakala Services", "Documents", "Karnataka", "https://www.sakala.kar.nic.in/", "Time-bound delivery of government services."),
-        
-        // Delhi
-        Service("Delhi Emergency", "Emergency", "Delhi", "https://delhi.gov.in/", "Central emergency services for the capital."),
-        Service("Delhi Women Safety", "Women Safety", "Delhi", "https://www.delhipolice.nic.in/", "Delhi Police women safety initiatives."),
-        Service("e-District Delhi", "Documents", "Delhi", "https://edistrict.delhigovt.nic.in/", "Online gateway for Delhi government services."),
-        
-        // Generic/Placeholder for others (as placeholders for production-grade scale)
-        Service("Gujarat State Portal", "Public Safety", "Gujarat", "https://gujaratindia.gov.in/", "Official Gujarat government portal."),
-        Service("TN e-Sevai", "Documents", "Tamil Nadu", "https://www.tnesevai.tn.gov.in/", "Tamil Nadu e-Governance services."),
-        Service("UP e-District", "Documents", "Uttar Pradesh", "https://edistrict.up.gov.in/", "Uttar Pradesh digital services portal."),
-        Service("WB State Portal", "Public Safety", "West Bengal", "https://www.wb.gov.in/", "Official West Bengal government portal.")
+        // Environmental and pollution complaints
+        Service("Noise Pollution", "Environmental and pollution complaints", "Maharashtra", "https://mpcb.gov.in/", "Report excessive noise levels."),
+        Service("Air Pollution", "Environmental and pollution complaints", "Maharashtra", "https://mpcb.gov.in/", "Monitor and report air quality issues."),
+        Service("Water Pollution", "Environmental and pollution complaints", "Maharashtra", "https://mpcb.gov.in/", "Report industrial or urban water waste."),
+        Service("Smoke/Burning", "Environmental and pollution complaints", "Maharashtra", "https://mpcb.gov.in/", "Report illegal waste or crop burning."),
+
+        // Public Safety and Civic Issues
+        Service("Road Safety", "Public Safety and Civic Issues", "Maharashtra", "https://transport.maharashtra.gov.in/", "Safety guidelines and road condition reports."),
+        Service("Traffic Violations", "Public Safety and Civic Issues", "Maharashtra", "https://mahatrafficticket.gov.in/", "Check and pay traffic fines."),
+        Service("Streetlight/Infrastructure", "Public Safety and Civic Issues", "Maharashtra", "https://mcmc.gov.in/", "Report broken streetlights or potholes."),
+        Service("Waste Management", "Public Safety and Civic Issues", "Maharashtra", "https://swachhbharatmission.gov.in/", "Report garbage collection issues."),
+
+        // Women and child Safety
+        Service("Women Helpline", "Women and child Safety", "Maharashtra", "https://wcd.maharashtra.gov.in/", "181 Women helpline services."),
+        Service("Child Support", "Women and child Safety", "Maharashtra", "https://1098.gov.in/", "1098 Childline emergency response."),
+        Service("Domestic Violence Support", "Women and child Safety", "Maharashtra", "https://mumbaipolice.gov.in/WomenSafety", "Legal help and safe shelter reporting."),
+        Service("Cyber Crime Support", "Women and child Safety", "Maharashtra", "https://www.cybercrime.gov.in/", "Report online harassment and safety issues."),
+
+        // Health and Sanitation
+        Service("Public Health", "Health and Sanitation", "Maharashtra", "https://arogya.maharashtra.gov.in/", "General health complaints and info."),
+        Service("Food Safety", "Health and Sanitation", "Maharashtra", "https://fda.maharashtra.gov.in/", "Report expired or adulterated food."),
+        Service("Sanitation/Hygiene", "Health and Sanitation", "Maharashtra", "https://swachhbharatmission.gov.in/", "Public toilet and hygiene complaints."),
+        Service("Medical Facilities", "Health and Sanitation", "Maharashtra", "https://dmer.maharashtra.gov.in/", "Locate government hospitals and clinics.")
     )
 
     fun getFilteredServices(state: String?, category: String?): List<Service> {

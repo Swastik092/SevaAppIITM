@@ -2,6 +2,7 @@ package com.seva.app
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -73,8 +74,10 @@ fun HomeScreen(
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp)
+            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 24.dp)
         ) {
+            val borderStroke = BorderStroke(1.5.dp, Color.White.copy(alpha = 0.8f))
+
             item {
                 // Search Bar Section
                 Box(
@@ -114,13 +117,13 @@ fun HomeScreen(
                         .height(200.dp)
                         .clip(RoundedCornerShape(24.dp))
                 ) {
-                    // Background Image (India Gate)
+                    // Background Image (National Emblem)
                     Image(
-                        painter = painterResource(id = R.drawable.india_gate),
+                        painter = painterResource(id = R.drawable.emblem_india),
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxSize()
-                            .blur(4.dp),
+                            .blur(2.dp),
                         contentScale = ContentScale.Crop
                     )
                     
@@ -232,113 +235,187 @@ fun HomeScreen(
 
             // Emergency Services Section
             item {
-                Row(
+                Surface(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    color = Color.White.copy(alpha = 0.95f),
+                    shape = RoundedCornerShape(24.dp),
+                    border = borderStroke,
+                    shadowElevation = 4.dp
                 ) {
-                    Text(
-                        text = "Emergency Services",
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                        color = SevaDarkBlue
-                    )
-                    Surface(
-                        color = Color(0xFFFFE5E5),
-                        shape = RoundedCornerShape(4.dp)
-                    ) {
-                        Text(
-                            text = "24/7 AVAILABLE",
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = Color(0xFFE53935),
-                            fontWeight = FontWeight.Bold
-                        )
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "Emergency Services",
+                                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                                color = SevaDarkBlue
+                            )
+                            Surface(
+                                color = Color(0xFFFFE5E5),
+                                shape = RoundedCornerShape(4.dp)
+                            ) {
+                                Text(
+                                    text = "24/7 AVAILABLE",
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = Color(0xFFE53935),
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        // Emergency Quick Links Grid (2x2)
+                        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Fire Brigade", "101", Color(0xFFFFF3E0), Color(0xFFFB8C00), Icons.Default.FireTruck)
+                                EmergencySmallCard(Modifier.weight(1f), "Police", "100", Color(0xFFE3F2FD), Color(0xFF1E88E5), Icons.Default.Security)
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Ambulance", "102", Color(0xFFE8F5E9), Color(0xFF43A047), Icons.Default.MedicalServices)
+                                EmergencySmallCard(Modifier.weight(1f), "Disaster", "108", Color(0xFFFFEBEE), Color(0xFFD32F2F), Icons.Default.Warning)
+                            }
+                        }
                     }
                 }
-                
-                Spacer(modifier = Modifier.height(16.dp))
-                
-                // Emergency Quick Links Grid (2x2)
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        EmergencySmallCard(Modifier.weight(1f), "Fire Brigade", "101", Color(0xFFFFF3E0), Color(0xFFFB8C00), Icons.Default.FireTruck)
-                        EmergencySmallCard(Modifier.weight(1f), "Police", "100", Color(0xFFE3F2FD), Color(0xFF1E88E5), Icons.Default.Security)
-                    }
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        EmergencySmallCard(Modifier.weight(1f), "Ambulance", "102", Color(0xFFE8F5E9), Color(0xFF43A047), Icons.Default.MedicalServices)
-                        EmergencySmallCard(Modifier.weight(1f), "Disaster", "108", Color(0xFFFFEBEE), Color(0xFFD32F2F), Icons.Default.Warning)
-                    }
-                }
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(24.dp))
             }
 
             // Environmental and Pollution Complaints Section
             item {
-                Text(
-                    text = "Environmental and pollution complaints",
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                    color = SevaDarkBlue
-                )
-                
-                Spacer(modifier = Modifier.height(16.dp))
-                
-                // Environmental Quick Links Grid (2x2)
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        EmergencySmallCard(Modifier.weight(1f), "Noise Pollution", "Complaint", Color(0xFFF3E5F5), Color(0xFF8E24AA), Icons.Default.VolumeUp)
-                        EmergencySmallCard(Modifier.weight(1f), "Air Pollution", "Complaint", Color(0xFFE0F7FA), Color(0xFF00838F), Icons.Default.Air)
-                    }
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        EmergencySmallCard(Modifier.weight(1f), "Water Pollution", "Complaint", Color(0xFFE1F5FE), Color(0xFF0277BD), Icons.Default.WaterDrop)
-                        EmergencySmallCard(Modifier.weight(1f), "Smoke/Burning", "Complaint", Color(0xFFFBE9E7), Color(0xFFBF360C), Icons.Default.SmokingRooms)
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = Color.White.copy(alpha = 0.95f),
+                    shape = RoundedCornerShape(24.dp),
+                    border = borderStroke,
+                    shadowElevation = 4.dp
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = "Environmental and pollution complaints",
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = SevaDarkBlue
+                        )
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        // Environmental Quick Links Grid (2x2)
+                        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Noise Pollution", "Complaint", Color(0xFFF3E5F5), Color(0xFF8E24AA), Icons.Default.VolumeUp)
+                                EmergencySmallCard(Modifier.weight(1f), "Air Pollution", "Complaint", Color(0xFFE0F7FA), Color(0xFF00838F), Icons.Default.Air)
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Water Pollution", "Complaint", Color(0xFFE1F5FE), Color(0xFF0277BD), Icons.Default.WaterDrop)
+                                EmergencySmallCard(Modifier.weight(1f), "Smoke/Burning", "Complaint", Color(0xFFFBE9E7), Color(0xFFBF360C), Icons.Default.SmokingRooms)
+                            }
+                        }
                     }
                 }
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(24.dp))
             }
 
             // Public Safety and Civic Issues Section
             item {
-                Text(
-                    text = "Public safety and Civic issues",
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                    color = SevaDarkBlue
-                )
-                
-                Spacer(modifier = Modifier.height(16.dp))
-                
-                // Public Safety Quick Links Grid (2x2)
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        EmergencySmallCard(Modifier.weight(1f), "Road Safety", "Issue", Color(0xFFFFF8E1), Color(0xFFFFA000), Icons.Default.AddRoad)
-                        EmergencySmallCard(Modifier.weight(1f), "Traffic", "Issue", Color(0xFFFFEBEE), Color(0xFFE53935), Icons.Default.Traffic)
-                    }
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        EmergencySmallCard(Modifier.weight(1f), "Streetlight", "Issue", Color(0xFFE1F5FE), Color(0xFF039BE5), Icons.Default.Lightbulb)
-                        EmergencySmallCard(Modifier.weight(1f), "Waste", "Issue", Color(0xFFE8F5E9), Color(0xFF43A047), Icons.Default.Delete)
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = Color.White.copy(alpha = 0.95f),
+                    shape = RoundedCornerShape(24.dp),
+                    border = borderStroke,
+                    shadowElevation = 4.dp
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = "Public safety and Civic issues",
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = SevaDarkBlue
+                        )
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        // Public Safety Quick Links Grid (2x2)
+                        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Road Safety", "Issue", Color(0xFFFFF8E1), Color(0xFFFFA000), Icons.Default.AddRoad)
+                                EmergencySmallCard(Modifier.weight(1f), "Traffic", "Issue", Color(0xFFFFEBEE), Color(0xFFE53935), Icons.Default.Traffic)
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Streetlight", "Issue", Color(0xFFE1F5FE), Color(0xFF039BE5), Icons.Default.Lightbulb)
+                                EmergencySmallCard(Modifier.weight(1f), "Waste", "Issue", Color(0xFFE8F5E9), Color(0xFF43A047), Icons.Default.Delete)
+                            }
+                        }
                     }
                 }
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(24.dp))
             }
 
             // Women and Child Safety Section
             item {
-                Text(
-                    text = "Women and child Safety",
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                    color = SevaDarkBlue
-                )
-                
-                Spacer(modifier = Modifier.height(16.dp))
-                
-                // Women and Child Safety Quick Links Grid (2x2)
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        EmergencySmallCard(Modifier.weight(1f), "Women Helpline", "Helpline", Color(0xFFFCE4EC), Color(0xFFD81B60), Icons.Default.Woman)
-                        EmergencySmallCard(Modifier.weight(1f), "Child Support", "Helpline", Color(0xFFF3E5F5), Color(0xFF7B1FA2), Icons.Default.ChildCare)
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = Color.White.copy(alpha = 0.95f),
+                    shape = RoundedCornerShape(24.dp),
+                    border = borderStroke,
+                    shadowElevation = 4.dp
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = "Women and child Safety",
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = SevaDarkBlue
+                        )
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        // Women and Child Safety Quick Links Grid (2x2)
+                        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Women Helpline", "Helpline", Color(0xFFFCE4EC), Color(0xFFD81B60), Icons.Default.Woman)
+                                EmergencySmallCard(Modifier.weight(1f), "Child Support", "Helpline", Color(0xFFF3E5F5), Color(0xFF7B1FA2), Icons.Default.ChildCare)
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Domestic Violence", "Support", Color(0xFFEFEBE9), Color(0xFF5D4037), Icons.Default.GppMaybe)
+                                EmergencySmallCard(Modifier.weight(1f), "Cyber Crime", "Support", Color(0xFFECEFF1), Color(0xFF455A64), Icons.Default.Computer)
+                            }
+                        }
                     }
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        EmergencySmallCard(Modifier.weight(1f), "Domestic Violence", "Support", Color(0xFFEFEBE9), Color(0xFF5D4037), Icons.Default.GppMaybe)
-                        EmergencySmallCard(Modifier.weight(1f), "Cyber Crime", "Support", Color(0xFFECEFF1), Color(0xFF455A64), Icons.Default.Computer)
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+            }
+
+            // Health and Sanitation Section
+            item {
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = Color.White.copy(alpha = 0.95f),
+                    shape = RoundedCornerShape(24.dp),
+                    border = borderStroke,
+                    shadowElevation = 4.dp
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = "Health and Sanitation",
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = SevaDarkBlue
+                        )
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        // Health and Sanitation Quick Links Grid (2x2)
+                        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Public Health", "Complaint", Color(0xFFE0F2F1), Color(0xFF00695C), Icons.Default.MedicalServices)
+                                EmergencySmallCard(Modifier.weight(1f), "Food Safety", "Issue", Color(0xFFFFF3E0), Color(0xFFE65100), Icons.Default.Restaurant)
+                            }
+                            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                EmergencySmallCard(Modifier.weight(1f), "Sanitation", "Complaint", Color(0xFFE1F5FE), Color(0xFF01579B), Icons.Default.CleaningServices)
+                                EmergencySmallCard(Modifier.weight(1f), "Hygiene", "Issue", Color(0xFFF3E5F5), Color(0xFF4A148C), Icons.Default.Sanitizer)
+                            }
+                        }
                     }
                 }
                 Spacer(modifier = Modifier.height(32.dp))
@@ -493,7 +570,7 @@ fun CategoriesScreen(onCategoryClick: (String) -> Unit) {
                     icon = Icons.Default.Eco,
                     iconColor = Color(0xFFE8F5E9),
                     tint = Color(0xFF43A047),
-                    onClick = { onCategoryClick("Environmental") }
+                    onClick = { onCategoryClick("Environmental and pollution complaints") }
                 )
             }
             item {
@@ -503,7 +580,7 @@ fun CategoriesScreen(onCategoryClick: (String) -> Unit) {
                     icon = Icons.Default.Security,
                     iconColor = Color(0xFFE3F2FD),
                     tint = Color(0xFF1E88E5),
-                    onClick = { onCategoryClick("Public Safety") }
+                    onClick = { onCategoryClick("Public Safety and Civic Issues") }
                 )
             }
             item {
@@ -513,7 +590,17 @@ fun CategoriesScreen(onCategoryClick: (String) -> Unit) {
                     icon = Icons.Default.Woman,
                     iconColor = Color(0xFFFCE4EC),
                     tint = Color(0xFFD81B60),
-                    onClick = { onCategoryClick("Women Safety") }
+                    onClick = { onCategoryClick("Women and child Safety") }
+                )
+            }
+            item {
+                CategoryCard(
+                    title = "Health and Sanitation",
+                    description = "Public health, food safety, sanitation and hygiene.",
+                    icon = Icons.Default.HealthAndSafety,
+                    iconColor = Color(0xFFE0F2F1),
+                    tint = Color(0xFF00695C),
+                    onClick = { onCategoryClick("Health and Sanitation") }
                 )
             }
             item { Spacer(modifier = Modifier.height(16.dp)) }
